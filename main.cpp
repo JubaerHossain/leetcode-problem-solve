@@ -1,64 +1,34 @@
 #include <bits/stdc++.h>
-using namespace std; 
+using namespace std;
 
-class Solution {
+class Solution
+{
 public:
-    vector<int> searchRange(vector<int>& nums, int target) {
-        int low = 0, high = nums.size() - 1;
-        while (low <= high)
+    int searchInsert(vector<int> &nums, int target)
+    {
+        int n = nums.size();
+        int l = 0, r = n - 1;
+        while (l <= r)
         {
-            cout << low << " " << high << endl;
-            int mid = (low + high) / 2;
-            cout << "mid" << mid << endl;
+            int mid = l + (r - l) / 2;
             if (nums[mid] == target)
-            {
-                int left = mid, right = mid;
-                cout << "left" << left << " and " << "right" << right << endl;
-                while (left > 0 && nums[left - 1] == target)
-                    left--;
-                while (right < nums.size() - 1 && nums[right + 1] == target)
-                    right++;
-                return {left, right};
-            }
-            if (nums[mid] < nums[high])
-            {
-                if (nums[mid] < target && target <= nums[high])
-                {
-                    low = mid + 1;
-                }
-                else
-                {
-                    high = mid - 1;
-                }
-            }
+                return mid;
+            else if (nums[mid] < target)
+                l = mid + 1;
             else
-            {
-                if (nums[low] <= target && target < nums[mid])
-                {
-                    high = mid - 1;
-                }
-                else
-                {
-                    low = mid + 1;
-                }
-            }
+                r = mid - 1;
         }
-        return {-1, -1};        
-        
+        return l;
     }
 };
 
 int main()
 {
     Solution s;
-    vector<int> nums = {5,7,7,8,8,10};
-    int target = 8;
-    vector<int> res = s.searchRange(nums, target);
-    for (int i = 0; i < res.size(); i++)
-    {
-        cout << res[i] << " ";
-    }
 
-    
+    vector<int> nums = {1, 3, 5, 6};
+
+    cout << s.searchInsert(nums, 5) << endl;
+
     return 0;
 }
