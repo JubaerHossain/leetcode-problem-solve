@@ -9,7 +9,6 @@ public:
         int l = 0, r = n - 1;
         while (l < r) {
             int mid = (l + r ) / 2;
-            cout << l << " " << r << " " << mid << endl;
             if (nums[mid] == nums[r]) {
                 r = mid - 1;
             }else if (nums[mid] < nums[r]) {
