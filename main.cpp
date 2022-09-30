@@ -22,6 +22,10 @@ public:
 
         
     }
+
+    int findMinSTL(vector<int>& nums) {
+        return *min_element(nums.begin(), nums.end());
+    }
 };
 
 int main()
@@ -30,6 +34,8 @@ int main()
     vector<int> nums = {1,3,3};
     Solution s;
     cout << s.findMin(nums) << endl;
+
+    cout << s.findMinSTL(nums) << endl;
 
 
 
