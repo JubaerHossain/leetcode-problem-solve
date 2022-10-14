@@ -15,37 +15,41 @@
 #define uniq(a) sort(all(a)); (a).erase(unique((a).begin(),(a).end()),(a).end())
 #define tc int test; cin>>test; while(test--)
 using namespace std; 
+
 class Solution {
 public:
-    vector<int> twoSum(vector<int>& nums, int target) {
-        unordered_map<int,int> m;
-        vector<int> ans;
-        for(int i = 0;i<nums.size();i++){
-            cout << (target-nums[i]) << endl;
-            if(m.find(target-nums[i])!=m.end()){
-                // cout << nums[i] << "->" << target-nums[i] << endl;
-                cout << m[target-nums[i]] << "->" << i << endl;
-                ans.push_back(m[target-nums[i]]);
-                ans.push_back(i);
-                return ans;
-            }
-            m[nums[i]] = i;
+    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+        vector<vector<string>> ans;
+        unordered_map<string, vector<string>> mp;
+        for(auto s: strs){
+            
+
+        }
+        for(auto it: mp){
+            cout<<it.first<<" ";
+        }
+        for(auto it: mp){
+            ans.push_back(it.second);
         }
         return ans;
+
         
     }
 };
 
 int main()
 {
-    
     Solution s;
-    vector<int> v = {2,1,7,11,15};
-    int target = 9;
-    vector<int> ans = s.twoSum(v,target);
-    for(int i=0;i<ans.size();i++){
-        cout<<ans[i]<<" ";
-    }
-
+    vector<string> v = {"eat", "tea", "tan", "ate", "nat", "bat"};
+    vector<vector<string>> ans = s.groupAnagrams(v);
+    // for(auto i:ans)
+    // {
+    //     for(auto j:i)
+    //     {
+    //         cout<<j<<" ";
+    //     }
+    //     cout<<endl;
+    // }
+    
     return 0;
 }
