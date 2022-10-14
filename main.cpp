@@ -23,10 +23,10 @@ public:
         unordered_map<string, vector<string>> mp;
         for(auto s: strs){
             
+            mp[s].push_back(s);
 
-        }
-        for(auto it: mp){
-            cout<<it.first<<" ";
+            
+
         }
         for(auto it: mp){
             ans.push_back(it.second);
@@ -42,14 +42,14 @@ int main()
     Solution s;
     vector<string> v = {"eat", "tea", "tan", "ate", "nat", "bat"};
     vector<vector<string>> ans = s.groupAnagrams(v);
-    // for(auto i:ans)
-    // {
-    //     for(auto j:i)
-    //     {
-    //         cout<<j<<" ";
-    //     }
-    //     cout<<endl;
-    // }
+    for(auto i:ans)
+    {
+        for(auto j:i)
+        {
+            cout<<j<<" ";
+        }
+        cout<<endl;
+    }
     
     return 0;
 }
