@@ -15,24 +15,17 @@
 #define uniq(a) sort(all(a)); (a).erase(unique((a).begin(),(a).end()),(a).end())
 #define tc int test; cin>>test; while(test--)
 using namespace std; 
-
 class Solution {
 public:
-    vector<vector<string>> groupAnagrams(vector<string>& strs) {
-        vector<vector<string>> ans;
-        unordered_map<string, vector<string>> mp;
-        for(auto s: strs){
-            string temp = s;
-            sort(temp.begin(), temp.end());
-            mp[temp].push_back(s);           
-
+    int maxSubArray(vector<int>& nums) {
+        int n = nums.size();
+        int max_so_far = nums[0];
+        int curr_max = nums[0];
+        for(int i=1;i<n;i++){
+            curr_max = max(nums[i],curr_max+nums[i]);
+            max_so_far = max(max_so_far,curr_max);
         }
-        for(auto it: mp){
-            ans.push_back(it.second);
-        }
-        return ans;
-        
-
+        return max_so_far;
         
     }
 };
@@ -40,16 +33,9 @@ public:
 int main()
 {
     Solution s;
-    vector<string> v = {"eat", "tea", "tan", "ate", "nat", "bat"};
-    vector<vector<string>> ans = s.groupAnagrams(v);
-    for(auto i:ans)
-    {
-        for(auto j:i)
-        {
-            cout<<j<<" ";
-        }
-        cout<<endl;
-    }
+    vector<int> nums = {-2,1,-3,4,-1,2,1,-5,4};
+    cout<<s.maxSubArray(nums)<<endl;
+
     
     return 0;
 }
