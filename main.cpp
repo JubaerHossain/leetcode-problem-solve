@@ -1,46 +1,43 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
+#define ll long long
+#define ld long double
+#define pb push_back
+#define pf push_front
+#define ppb pop_back
+#define ppf pop_front
+#define maxe *max_element
+#define mine *min_element
+#define mem(a,b) memset(a,b,sizeof(a))
+#define all(a) (a).begin(),(a).end()
+#define gcd(a,b) __gcd(a,b)
+#define lcm(a,b) ((a)*((b)/gcd(a,b)))
+#define point(a) fixed<<setprecision(a)
+#define uniq(a) sort(all(a)); (a).erase(unique((a).begin(),(a).end()),(a).end())
+#define tc int test; cin>>test; while(test--)
 using namespace std;
-class Solution
-{
+class Solution {
 public:
-    int smallestDivisor(vector<int> &nums, int threshold)
-    {
-        int low = 1, high = *max_element(nums.begin(), nums.end());
-        int ans = high;
-
-        while (low < high)
-        {
-            int mid = (high + low) / 2;
-            int sum = 0;
-            for (int i = 0; i < nums.size(); i++)
-            {
-                sum += (nums[i] / mid);
-                
-                if (nums[i] % mid == 0)
-                {
-                    sum += 1;
-                }
+    bool containsDuplicate(vector<int>& nums) {
+        //optimized solution
+        unordered_set<int> s;
+        for(int i=0;i<nums.size();i++){
+            if(s.find(nums[i])!=s.end()){
+                return true;
             }
-            if (sum <= threshold)
-            {
-                ans = mid;
-                high = mid - 1;
-            }
-            else
-            {
-                low = mid + 1;
-            }
+            s.insert(nums[i]);
         }
-        return ans;
+        return false;
+
+        
     }
-};
+}; 
 
 int main()
 {
+    vector<int> nums = {1,2,3,4};
     Solution s;
-    vector<int> nums = {1, 2, 5, 9};
-    int threshold = 6;
-    cout << s.smallestDivisor(nums, threshold);
+    cout<<s.containsDuplicate(nums)<<endl;
 
+    
     return 0;
 }
