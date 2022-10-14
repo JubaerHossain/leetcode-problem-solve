@@ -22,16 +22,16 @@ public:
         vector<vector<string>> ans;
         unordered_map<string, vector<string>> mp;
         for(auto s: strs){
-            
-            mp[s].push_back(s);
-
-            
+            string temp = s;
+            sort(temp.begin(), temp.end());
+            mp[temp].push_back(s);           
 
         }
         for(auto it: mp){
             ans.push_back(it.second);
         }
         return ans;
+        
 
         
     }
