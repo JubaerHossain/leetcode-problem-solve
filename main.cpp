@@ -17,37 +17,30 @@
 using namespace std; 
 class Solution {
 public:
-    vector<int> topKFrequent(vector<int>& nums, int k) {
-        unordered_map<int,int>mp;
-        for(int i=0;i<nums.size();i++){
-            mp[nums[i]]++;
+    vector<int> productExceptSelf(vector<int>& nums) {
+        vector<int> ans;
+        int n = nums.size();
+        int left[n], right[n];
+        left[0] = 1;
+        right[n-1] = 1;
+        for(int i=1; i<n; i++){
+            left[i] = left[i-1]*nums[i-1];
         }
-        
-        priority_queue<pair<int,int>>pq;
-        for(auto it:mp){
-            cout<<it.first<<"->"<<it.second<<endl;
-            pq.push({it.second,it.first});
+        for(int i=n-2; i>=0; i--){
+            right[i] = right[i+1]*nums[i+1];
         }
-        vector<int>ans;
-        while(k--){
-            ans.push_back(pq.top().second);
-            pq.pop();
+        for(int i=0; i<n; i++){
+            ans.push_back(left[i]*right[i]);
         }
         return ans;
-
-        
-
         
     }
 };
-
 int main()
 {
     Solution s;
-    vector<int> v= {1,1,1,2,2,3};
-    int k = 2;
-
-    vector<int> ans = s.topKFrequent(v,k);
+    vector<int> v= {1,2,3,4};
+    vector<int> ans = s.productExceptSelf(v);
 
     for(auto i:ans)
         cout<<i<<" ";
