@@ -14,30 +14,33 @@
 #define point(a) fixed<<setprecision(a)
 #define uniq(a) sort(all(a)); (a).erase(unique((a).begin(),(a).end()),(a).end())
 #define tc int test; cin>>test; while(test--)
-using namespace std;
+using namespace std; 
+
 class Solution {
 public:
-    bool containsDuplicate(vector<int>& nums) {
-        //optimized solution
-        unordered_set<int> s;
-        for(int i=0;i<nums.size();i++){
-            if(s.find(nums[i])!=s.end()){
-                return true;
-            }
-            s.insert(nums[i]);
+    bool isAnagram(string s, string t) {
+        if(s.length()!=t.length()) return false;
+        int n=s.length();
+        cout << n << endl;
+        int a[26]={0};
+        for(int i=0;i<n;i++){
+            a[s[i]-'a']++;
+            a[t[i]-'a']--;
         }
-        return false;
-
+        for(int i=0;i<26;i++){
+            if(a[i]!=0) return false;
+        }
+        return true;
         
     }
-}; 
+};
 
 int main()
 {
-    vector<int> nums = {1,2,3,4};
+    ios_base::sync_with_stdio(false);
     Solution s;
-    cout<<s.containsDuplicate(nums)<<endl;
-
+    string s1="anagram",s2="nagaram";
+    cout<<s.isAnagram(s1,s2);
     
     return 0;
 }

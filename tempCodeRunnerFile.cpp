@@ -1,1 +1,1 @@
-Solution
+26
