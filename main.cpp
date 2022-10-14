@@ -15,22 +15,26 @@
 #define uniq(a) sort(all(a)); (a).erase(unique((a).begin(),(a).end()),(a).end())
 #define tc int test; cin>>test; while(test--)
 using namespace std; 
-
 class Solution {
 public:
-    vector<vector<string>> groupAnagrams(vector<string>& strs) {
-        vector<vector<string>> ans;
-        unordered_map<string, vector<string>> mp;
-        for(auto s: strs){
-            string temp = s;
-            sort(temp.begin(), temp.end());
-            mp[temp].push_back(s);           
-
+    vector<int> topKFrequent(vector<int>& nums, int k) {
+        unordered_map<int,int>mp;
+        for(int i=0;i<nums.size();i++){
+            mp[nums[i]]++;
         }
-        for(auto it: mp){
-            ans.push_back(it.second);
+        
+        priority_queue<pair<int,int>>pq;
+        for(auto it:mp){
+            cout<<it.first<<"->"<<it.second<<endl;
+            pq.push({it.second,it.first});
+        }
+        vector<int>ans;
+        while(k--){
+            ans.push_back(pq.top().second);
+            pq.pop();
         }
         return ans;
+
         
 
         
@@ -40,16 +44,14 @@ public:
 int main()
 {
     Solution s;
-    vector<string> v = {"eat", "tea", "tan", "ate", "nat", "bat"};
-    vector<vector<string>> ans = s.groupAnagrams(v);
+    vector<int> v= {1,1,1,2,2,3};
+    int k = 2;
+
+    vector<int> ans = s.topKFrequent(v,k);
+
     for(auto i:ans)
-    {
-        for(auto j:i)
-        {
-            cout<<j<<" ";
-        }
-        cout<<endl;
-    }
-    
+        cout<<i<<" ";
+
+
     return 0;
 }
