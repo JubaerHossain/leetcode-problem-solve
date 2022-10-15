@@ -18,16 +18,20 @@ using namespace std;
 
 class Solution {
 public:
-    int maxArea(vector<int>& height) {
+    int trap(vector<int>& height) {
         int n = height.size();
-        int i = 0, j = n-1;
+        int left[n], right[n];
+        left[0] = height[0];
+        for(int i = 1; i < n; i++) {
+            left[i] = max(left[i-1], height[i]);
+        }
+        right[n-1] = height[n-1];
+        for(int i = n-2; i >= 0; i--) {
+            right[i] = max(right[i+1], height[i]);
+        }
         int ans = 0;
-        while(i < j){
-            int h = min(height[i], height[j]);
-            int w = j-i;
-            ans = max(ans, h*w);
-            if(height[i] < height[j]) i++;
-            else j--;
+        for(int i = 0; i < n; i++) {
+            ans += min(left[i], right[i]) - height[i];
         }
         return ans;
         
@@ -37,8 +41,8 @@ public:
 int main()
 {
     Solution s;
-    vector<int> v= {1,8,6,2,5,4,8,3,7};
-    cout<<s.maxArea(v);
+    vector<int> v= {0,1,0,2,1,0,1,3,2,1,2,1};
+    cout<<s.trap(v);
 
 
     return 0;
