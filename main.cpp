@@ -17,33 +17,22 @@
 using namespace std; 
 class Solution {
 public:
-    vector<int> productExceptSelf(vector<int>& nums) {
-        int n = nums.size();
-        vector<int> ans(n,1);
-        int left = 1;
-        for(int i=0;i<n;i++){
-            ans[i] = left;
-            left *= nums[i];
-        }
-        int right = 1;
-        for(int i=n-1;i>=0;i--){
-            ans[i] *= right;
-            right *= nums[i];
-        }
-        return ans;
-
-        
+ bool isPalindrome(string s) {
+    int i=0,j=s.size()-1;
+    while(i<j){
+        if(!isalnum(s[i])) i++;
+        else if(!isalnum(s[j])) j--;
+        else if(tolower(s[i++])!=tolower(s[j--])) return false;
     }
+    return true;
+};
 };
 int main()
 {
     Solution s;
-    vector<int> v= {1,2,3,4};
-    vector<int> ans = s.productExceptSelf(v);
-
-    for(auto i:ans)
-        cout<<i<<" ";
+    string str = "A man, a plan, a canal: Panama";
+    cout<<s.isPalindrome(str)<<endl;
 
 
     return 0;
-}
+};
