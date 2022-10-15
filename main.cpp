@@ -17,21 +17,31 @@
 using namespace std; 
 class Solution {
 public:
- bool isPalindrome(string s) {
-    int i=0,j=s.size()-1;
-    while(i<j){
-        if(!isalnum(s[i])) i++;
-        else if(!isalnum(s[j])) j--;
-        else if(tolower(s[i++])!=tolower(s[j--])) return false;
+ vector<int> twoSum(vector<int>& numbers, int target) {
+
+     int l=0,r=numbers.size()-1;
+     while(l<r){
+         if(numbers[l]+numbers[r]==target){
+             return {l+1,r+1};
+         }
+         else if(numbers[l]+numbers[r]>target){
+             r--;
+         }
+         else{
+             l++;
+         }
+     }
+     return {};                   
     }
-    return true;
-};
 };
 int main()
 {
     Solution s;
-    string str = "A man, a plan, a canal: Panama";
-    cout<<s.isPalindrome(str)<<endl;
+    vector<int> v = {2,7,11,15};
+    int target = 9;
+    vector<int> ans = s.twoSum(v,target);
+    for(auto i:ans)
+        cout<<i<<" ";
 
 
     return 0;
