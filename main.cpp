@@ -15,54 +15,30 @@
 #define uniq(a) sort(all(a)); (a).erase(unique((a).begin(),(a).end()),(a).end())
 #define tc int test; cin>>test; while(test--)
 using namespace std; 
+
 class Solution {
 public:
-    vector<vector<int>> threeSum(vector<int>& nums) {
-        vector<vector<int>> ans = {};
-        int n = nums.size();
-        sort(nums.begin(), nums.end());
-        for(int i = 0; i< n-2; i++ ){
-
-            if(nums[i] > 0) break;
-            if(i > 0 && nums[i] == nums[i-1]) continue;
-           
-            int l = i+1;
-            int r = n-1;
-            while(l<r){
-                int sum = nums[i] + nums[l] + nums[r];
-                if(sum < 0){
-                    l++;
-                }
-                else if(sum > 0){
-                    r--;
-                }
-                else{
-                    ans.push_back({nums[i], nums[l], nums[r]});
-                    while(l<r && nums[l] == nums[l+1]) l++;
-                    while(l<r && nums[r] == nums[r-1]) r--;
-                    l++;
-                    r--;
-                }
-            }
-            
+    int maxArea(vector<int>& height) {
+        int n = height.size();
+        int i = 0, j = n-1;
+        int ans = 0;
+        while(i < j){
+            int h = min(height[i], height[j]);
+            int w = j-i;
+            ans = max(ans, h*w);
+            if(height[i] < height[j]) i++;
+            else j--;
         }
         return ans;
         
     }
 };
+
 int main()
 {
     Solution s;
-    vector<int> v = {-1,0,1,2,-1,-4};
-    vector<vector<int>> ans = s.threeSum(v);
-    for(auto i:ans)
-    {
-        for(auto j:i)
-        {
-            cout<<j<<" ";
-        }
-        cout<<endl;
-    }
+    vector<int> v= {1,8,6,2,5,4,8,3,7};
+    cout<<s.maxArea(v);
 
 
     return 0;
