@@ -8,6 +8,7 @@
     "deque": "cpp",
     "format": "cpp",
     "list": "cpp",
-    "set": "cpp"
+    "set": "cpp",
+    "iostream": "cpp"
   }
 }
