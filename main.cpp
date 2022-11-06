@@ -20,23 +20,36 @@
     cin >> test; \
     while (test--)
 using namespace std;
+
+
 class Solution {
 public:
-    int countDigitOne(int n) {
-        int count = 0;
-        for (long long i = 1; i <= n; i *= 10) {
-            long long divider = i * 10;
-            count += (n / divider) * i + min(max(n % divider - i + 1, 0LL), i);
+    bool isPalindrome(int x) {
+        int temp = x;
+        int rev = 0;
+        while(temp > 0){
+            int rem = temp % 10;
+            if(rev > INT_MAX / 10 || (rev == INT_MAX / 10 && rem > 7)) return 0;
+            if(rev < INT_MIN / 10 || (rev == INT_MIN / 10 && rem < -8)) return 0;
+            rev = rev * 10 + rem;
+            temp /= 10;
         }
-        return count;
+
+        if(rev == x) {
+            return 1;
+        }else{
+            return 0;
+        }
+        
     }
 };
+
 
 int main()
 {
 
     Solution s;
-    cout << s.countDigitOne(13) << endl;
+    cout << s.isPalindrome(1234567899) << endl;
 
     return 0;
 }
