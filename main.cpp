@@ -21,35 +21,40 @@
     while (test--)
 using namespace std;
 
+int recursion(int n)
+{
+    if (n == 1)
+    {
+        return n;
+    }
+    else
+    {
+        return recursion(n - 1);
+    }
+}
 
-class Solution {
+class Solution
+{
 public:
-    bool isPalindrome(int x) {
-        int temp = x;
-        int rev = 0;
-        while(temp > 0){
-            int rem = temp % 10;
-            if(rev > INT_MAX / 10 || (rev == INT_MAX / 10 && rem > 7)) return 0;
-            if(rev < INT_MIN / 10 || (rev == INT_MIN / 10 && rem < -8)) return 0;
-            rev = rev * 10 + rem;
-            temp /= 10;
+    int fib(int n)
+    {
+        if (n == 1)
+        {
+            return n;
         }
-
-        if(rev == x) {
-            return 1;
-        }else{
-            return 0;
+        else
+        {
+            return fib(n - 1);
         }
-        
     }
 };
-
 
 int main()
 {
 
     Solution s;
-    cout << s.isPalindrome(1234567899) << endl;
+
+    cout << s.fib(2) << endl;
 
     return 0;
 }
