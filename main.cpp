@@ -22,6 +22,9 @@ public:
         int n = nums.size();
         int count = 0;
         for(int i = 0; i < n; i++){
+            cout << nums[i] << " ";
+            cout << endl;
+            cout <<" nums[(i+1)%n] " << nums[(i+1)%n] << endl;
             if(nums[i] > nums[(i+1)%n]) count++;
         }
         return count <= 1;
