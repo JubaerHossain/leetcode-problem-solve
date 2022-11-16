@@ -18,24 +18,26 @@ using namespace std;
 
 class Solution {
 public:
-    bool check(vector<int>& nums) {
-        int n = nums.size();
-        int count = 0;
-        for(int i = 0; i < n; i++){
-            cout << nums[i] << " ";
-            cout << endl;
-            cout <<" nums[(i+1)%n] " << nums[(i+1)%n] << endl;
-            if(nums[i] > nums[(i+1)%n]) count++;
+    int removeDuplicates(vector<int>& nums) {
+        unordered_set<int> s;
+        for(int i=0;i<nums.size();i++){
+            s.insert(nums[i]);
         }
-        return count <= 1;
+        nums.clear();
+        for(auto i:s){
+            nums.push_back(i);
+        }
+        sort(nums.begin(),nums.end());
+        return nums.size();
+        
     }
 };
-
 int main()
 {
     Solution s;
-    vector<int> v = {3,4,5,1,2};
-    cout<<s.check(v)<<endl;
+    vector<int> v = {1,1,2};
+    cout<<s.removeDuplicates(v);
+
     
     return 0;
 }
