@@ -37,6 +37,9 @@ public:
             else
             {
                 int temp = nums[i];
+                cout << "i " << i << endl;
+                cout << "temp " << temp << endl;
+                cout << "nums[i - c] " << nums[i - c] << endl;
                 nums[i] = nums[i - c];
                 nums[i - c] = temp;
 
