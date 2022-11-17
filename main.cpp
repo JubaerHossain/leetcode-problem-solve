@@ -24,39 +24,38 @@ using namespace std;
 class Solution
 {
 public:
-    void rotate(vector<int> &nums, int k)
+    void moveZeroes(vector<int> &nums)
     {
-        vector<int> temp;
-        int nn = nums.size();
-        int n;
-        n = k % nums.size();
-        
-        for (int i = n - k; i < n; i++)
+        int c = 0;
+        int n = nums.size();
+        for (int i = 0; i < n; i++)
         {
-            cout << "i = " << i << " ";
-            temp.push_back(nums[i]);
+            if (nums[i] == 0)
+            {
+                c++;
+            }
+            else
+            {
+                int temp = nums[i];
+                nums[i] = nums[i - c];
+                nums[i - c] = temp;
+
+            }
         }
-        // for (int i = 0; i < n - k; i++)
-        // {
-        //     temp.push_back(nums[i]);
-        // }
-        nums = temp;
-
-
-
-
     }
 };
 int main()
 {
     Solution s;
-    vector<int> v = {-1};
+    // vector<int> v = {0,0,1};
+    vector<int> v = {0,1,0,3,12};
 
-    s.rotate(v,2);
+    s.moveZeroes(v);
 
-    // for(auto x:v){
-    //     cout<<x<<" ";
-    // }
+    for (auto x : v)
+    {
+        cout << x << " ";
+    }
 
     return 0;
 }

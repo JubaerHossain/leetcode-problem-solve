@@ -1,2 +1,4 @@
-
-    void rotate(vector<int> &nums, int k)
+ile (c--)
+        // {
+        //     nums.pb(0);
+        // }
