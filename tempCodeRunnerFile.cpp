@@ -1,9 +1,2 @@
- unordered_set<int> s;
-        for(int i=0;i<nums.size();i++){
-            s.insert(nums[i]);
-        }
-        nums.clear();
-        for(auto i:s){
-            nums.push_back(i);
-        }
-        return nums.size();
+
+    void rotate(vector<int> &nums, int k)
