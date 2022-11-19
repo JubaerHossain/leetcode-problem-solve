@@ -23,27 +23,35 @@ using namespace std;
 
 class Solution {
 public:
-    int findPeakElement(vector<int>& nums) {
+    int search(vector<int>& nums, int target) {
+        int low = 0, high = nums.size() -1;
 
-        if(nums.size() ==  1) return 0;
-        if(nums[0] >= nums[1]) return 0;
-        
-        cout << "nums.size() = " << nums.size() << endl;
-        for(auto i = 0; i < nums.size()-1; i++){
-            if((i!= 1 && nums[i] > nums[i-1]) && nums[i] > nums[i+1]) return i;
+        while(low <= high){
+            int mid = low + (high -low )/ 2;
+            if(nums[mid] == target) return mid;
+            if(nums[low] <= nums[mid]){
+                if(nums[low] <= target && nums[mid] >= target){
+                    high = mid-1;
+                }else{
+                    low = mid +1;
+                }
+            }else{
+                if(nums[high] >= target && nums[mid] <= target){                   
+                     low = mid +1;
+                }else{
+                     high = mid-1;
+                }
+
+            }
         }
-
-        return nums.size()-1;
-        
+        return -1;
     }
 };
 int main()
 {
     Solution s;
-    vector<int> v = {1};
-    // vector<int> v = {1, 2, 3, 1};
-    // vector<int> v = {1,2,1,3,5,6,4};
-    cout << s.findPeakElement(v) << endl;
+    vector<int> v = {4,5,6,7,0,1,2};
+    cout << s.search(v, 0) << endl;
 
 
     return 0;
