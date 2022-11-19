@@ -21,44 +21,30 @@
     while (test--)
 using namespace std;
 
-class Solution
-{
+class Solution {
 public:
-    void moveZeroes(vector<int> &nums)
-    {
-        int c = 0;
-        int n = nums.size();
-        for (int i = 0; i < n; i++)
-        {
-            if (nums[i] == 0)
-            {
-                c++;
-            }
-            else
-            {
-                int temp = nums[i];
-                cout << "i " << i << endl;
-                cout << "temp " << temp << endl;
-                cout << "nums[i - c] " << nums[i - c] << endl;
-                nums[i] = nums[i - c];
-                nums[i - c] = temp;
+    int findPeakElement(vector<int>& nums) {
 
-            }
+        if(nums.size() ==  1) return 0;
+        if(nums[0] >= nums[1]) return 0;
+        
+        cout << "nums.size() = " << nums.size() << endl;
+        for(auto i = 0; i < nums.size()-1; i++){
+            if((i!= 1 && nums[i] > nums[i-1]) && nums[i] > nums[i+1]) return i;
         }
+
+        return nums.size()-1;
+        
     }
 };
 int main()
 {
     Solution s;
-    // vector<int> v = {0,0,1};
-    vector<int> v = {0,1,0,3,12};
+    vector<int> v = {1};
+    // vector<int> v = {1, 2, 3, 1};
+    // vector<int> v = {1,2,1,3,5,6,4};
+    cout << s.findPeakElement(v) << endl;
 
-    s.moveZeroes(v);
-
-    for (auto x : v)
-    {
-        cout << x << " ";
-    }
 
     return 0;
 }
