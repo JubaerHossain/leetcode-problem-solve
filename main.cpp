@@ -18,15 +18,21 @@ using namespace std;
 
 class Solution {
 public:
-    int findMin(vector<int>& nums) {
+    int singleNonDuplicate(vector<int>& nums) {
         int n = nums.size();
-        int l = 0, r = n - 1;
-        while(l < r) {
-            int mid = l + (r - l) / 2;
-            if(nums[mid] > nums[r]) l = mid + 1;
-            else r = mid;
+        int low = 0, high = n-1;
+        while(low < high){
+            int mid = low + (high-low)/2;
+            if(mid%2 == 0){
+                if(nums[mid] == nums[mid+1]) low = mid+2;
+                else high = mid;
+            }
+            else{
+                if(nums[mid] == nums[mid-1]) low = mid+1;
+                else high = mid-1;
+            }
         }
-        return nums[l];
+        return nums[low];
         
     }
 };
@@ -35,8 +41,9 @@ int main()
 {
     Solution s;
 
-    vector<int> nums = {3,4,5,1,2};
-    cout<<s.findMin(nums)<<endl;
+    // vector<int> nums = {1,1,1,3,3,4,4,6,8,8};
+    vector<int> nums = {3,3,7,7,10,11,11};
+    cout<<s.singleNonDuplicate(nums)<<endl;
     
     return 0;
 }
