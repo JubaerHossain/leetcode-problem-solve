@@ -1,4 +1,4 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 #define ll long long
 #define ld long double
 #define pb push_back
@@ -7,43 +7,72 @@
 #define ppf pop_front
 #define maxe *max_element
 #define mine *min_element
-#define mem(a,b) memset(a,b,sizeof(a))
-#define all(a) (a).begin(),(a).end()
-#define gcd(a,b) __gcd(a,b)
-#define lcm(a,b) ((a)*((b)/gcd(a,b)))
-#define point(a) fixed<<setprecision(a)
-#define uniq(a) sort(all(a)); (a).erase(unique((a).begin(),(a).end()),(a).end())
-#define tc int test; cin>>test; while(test--)
+#define mem(a, b) memset(a, b, sizeof(a))
+#define all(a) (a).begin(), (a).end()
+#define gcd(a, b) __gcd(a, b)
+#define lcm(a, b) ((a) * ((b) / gcd(a, b)))
+#define point(a) fixed << setprecision(a)
+#define uniq(a)   \
+    sort(all(a)); \
+    (a).erase(unique((a).begin(), (a).end()), (a).end())
+#define tc       \
+    int test;    \
+    cin >> test; \
+    while (test--)
 using namespace std;
 
-class Solution {
+class Solution
+{
 public:
-    int singleNonDuplicate(vector<int>& nums) {
-        int n = nums.size();
-        int low = 0, high = n-1;
-        while(low < high){
-            int mid = low + (high-low)/2;
-            if(mid%2 == 0){
-                if(nums[mid] == nums[mid+1]) low = mid+2;
-                else high = mid;
-            }
-            else{
-                if(nums[mid] == nums[mid-1]) low = mid+1;
-                else high = mid-1;
-            }
+    bool searchMatrix(vector<vector<int>> &matrix, int target)
+    {
+        // int n = matrix.size();
+        // using stl
+        // while(n--){
+        //     if(binary_search(matrix[n].begin(),matrix[n].end(),target))
+        //         return true;
+        // }
+
+        // int m = matrix[0].size();
+        // int i = 0; int j = m-1;
+        // while(i < n && j >= 0){
+        //     cout << matrix[i][j] << endl;
+        //     if(matrix[i][j] == target){
+        //         return true;
+        //     }
+        //     else if(matrix[i][j] > target){
+        //         j--;
+        //     }
+        //     else{
+        //         i++;
+        //     }
+        // }
+        int n = matrix.size();
+        int m = matrix[0].size();
+        int low = 0;
+        int high = (n * m) - 1;
+        while (low <= high)
+        {
+            cout << low << " " << high << endl;
+            int mid = low + (high - low) / 2;
+            if (matrix[mid / m][mid % m] == target)
+                return true;
+            if (matrix[mid / m][mid % m] < target)
+                low = mid + 1;
+            else
+                high = mid - 1;
         }
-        return nums[low];
-        
+        return false;
     }
 };
 
 int main()
 {
     Solution s;
+    // vector<vector<int>> matrix = {{1,3,5,7},{10,11,16,20},{23,30,34,60}};
+    vector<vector<int>> matrix = {{1}, {3}};
+    int target = 3;
+    cout << s.searchMatrix(matrix, target) << endl;
 
-    // vector<int> nums = {1,1,1,3,3,4,4,6,8,8};
-    vector<int> nums = {3,3,7,7,10,11,11};
-    cout<<s.singleNonDuplicate(nums)<<endl;
-    
     return 0;
 }
