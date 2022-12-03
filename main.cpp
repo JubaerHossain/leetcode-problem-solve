@@ -18,22 +18,35 @@ using namespace std;
 
 class Solution {
 public:
-    int smallestDivisor(vector<int>& nums, int threshold) {
-        int l = 1, r = 1e6;
-        while(l < r) {
-            int mid = (l + r) / 2;
-            int sum = 0;
-            for(int i = 0; i < nums.size(); i++) {
-                sum += (nums[i] + mid - 1) / mid;
+    int shipWithinDays(vector<int>& weights, int days) {
+        int n = weights.size();
+        int max = *max_element(weights.begin(), weights.end());
+        int sum = accumulate(weights.begin(), weights.end(), 0);
+        int low = max;
+        int high = sum;
+        int ans = 0;
+        while(low<=high){
+            int mid = (low+high)/2;
+            int count = 1;
+            int temp = 0;
+            for(int i=0;i<n;i++){
+                if(temp+weights[i]<=mid){
+                    temp += weights[i];
+                }
+                else{
+                    count++;
+                    temp = weights[i];
+                }
             }
-            if(sum > threshold) {
-                l = mid + 1;
-            } else {
-                r = mid;
+            if(count<=days){
+                ans = mid;
+                high = mid-1;
+            }
+            else{
+                low = mid+1;
             }
         }
-        return l;
-        
+        return ans;
         
     }
 };
@@ -41,10 +54,9 @@ public:
 int main()
 {
     Solution solution;
-    vector<int> nums = {1,2,5,9};
-    int threshold = 6;
-    cout<<solution.smallestDivisor(nums, threshold)<<endl;
-
+    vector<int> weights = {1,2,3,4,5,6,7,8,9,10};
+    int days = 5;
+    cout<<solution.shipWithinDays(weights, days)<<endl;
     
     return 0;
 }
