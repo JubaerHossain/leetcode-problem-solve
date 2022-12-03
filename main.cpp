@@ -15,48 +15,28 @@
 #define uniq(a) sort(all(a)); (a).erase(unique((a).begin(),(a).end()),(a).end())
 #define tc int test; cin>>test; while(test--)
 using namespace std; 
-
 class Solution {
 public:
-    int shipWithinDays(vector<int>& weights, int days) {
-        int n = weights.size();
-        int max = *max_element(weights.begin(), weights.end());
-        int sum = accumulate(weights.begin(), weights.end(), 0);
-        int low = max;
-        int high = sum;
-        int ans = 0;
-        while(low<=high){
-            int mid = (low+high)/2;
-            int count = 1;
-            int temp = 0;
-            for(int i=0;i<n;i++){
-                if(temp+weights[i]<=mid){
-                    temp += weights[i];
-                }
-                else{
-                    count++;
-                    temp = weights[i];
-                }
-            }
-            if(count<=days){
-                ans = mid;
-                high = mid-1;
-            }
-            else{
-                low = mid+1;
-            }
+    double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+        vector<int> v(nums1.size()+nums2.size());
+        merge(nums1.begin(),nums1.end(),nums2.begin(),nums2.end(),v.begin());
+        if(v.size()%2==0){
+            return (v[v.size()/2]+v[(v.size()/2)-1])/2.0;
         }
-        return ans;
+        else{
+            return v[v.size()/2];
+        }
         
     }
 };
 
 int main()
 {
-    Solution solution;
-    vector<int> weights = {1,2,3,4,5,6,7,8,9,10};
-    int days = 5;
-    cout<<solution.shipWithinDays(weights, days)<<endl;
+    Solution s1;
+    vector<int> nums1 = {1,3};
+    vector<int> nums2 = {2};
+    cout<<s1.findMedianSortedArrays(nums1,nums2)<<endl;
+
     
     return 0;
 }
